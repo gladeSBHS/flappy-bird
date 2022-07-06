@@ -1,0 +1,117 @@
+<!doctype html>
+
+<body>
+    <canvas id="gameCanvas" width="600" height="600"></canvas>
+    <script>
+        var canvas, canvasContext;
+
+        //player vars and consts
+        const PLAYER_SIZE = 30;
+        var playerXpos = 0;
+        var playerYpos = 570;
+        var playerXspeed = 10;
+        var playerYspeed = 10;
+        //enemy vars and consts
+
+        //key bindings 
+        var aKeyPressed = false;
+        var wKeyPressed = false;
+        var dKeyPressed = false;
+        var sKeyPressed = false;
+
+        const A_KEY = 65;
+        const W_KEY = 87;
+        const D_KEY = 68;
+        const S_KEY = 83;
+
+        var direction = 0;
+
+        window.onload = function () {
+            canvas = document.getElementById('gameCanvas');
+            canvasContext = canvas.getContext('2d');
+
+            document.addEventListener('keydown', keyPressed);
+            document.addEventListener('keyup', keyReleased);
+
+            setInterval(mainloop, 1000 / 50);
+        }
+
+
+        function mainloop() {
+            colorRect(0, 0, canvas.width, canvas.height, 'black'); // bg
+            colorRect(playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE, 'red'); //player
+            colorRect(enemyXpos, enemyYpos, ENEMY_SIZE, ENEMY_SIZE, 'blue'); //enemy
+            playerMove();
+
+        }
+
+
+        function drawImg(src, x, y, w, h) {
+
+
+        }
+
+
+        function keyPressed(evt) {
+            if (evt.keyCode == A_KEY) {
+                aKeyPressed = true;
+            }
+            if (evt.keyCode == W_KEY) {
+                wKeyPressed = true;
+            }
+            if (evt.keyCode == D_KEY) {
+                dKeyPressed = true;
+            }
+            if (evt.keyCode == S_KEY) {
+                sKeyPressed = true;
+            }
+        }
+
+        function keyReleased(evt) {
+            if (evt.keyCode == A_KEY) {
+                aKeyPressed = false;
+            }
+            if (evt.keyCode == W_KEY) {
+                wKeyPressed = false;
+            }
+            if (evt.keyCode == D_KEY) {
+                dKeyPressed = false;
+            }
+            if (evt.keyCode == S_KEY) {
+                sKeyPressed = false;
+            }
+        }
+
+        function colorRect(x, y, w, h, c) {
+            canvasContext.fillStyle = c;
+            canvasContext.fillRect(x, y, w, h);
+        }
+
+        function playerMove() {
+            if (wKeyPressed && playerYpos > 0) {
+                playerYpos -= playerYspeed
+            }
+            if (sKeyPressed && playerYpos < canvas.height - PLAYER_SIZE) {
+                playerYpos += playerYspeed
+            }
+            if (aKeyPressed && playerXpos > 0) {
+                playerXpos -= playerXspeed
+            }
+            if (dKeyPressed && playerXpos < canvas.width - PLAYER_SIZE) {
+                playerXpos += playerXspeed
+            }
+        }
+
+        var enemyXpos = 30;
+        var enemyYpos = 0;
+        var enemyXspeed = 10;
+        var enemyYspeed = 10;
+        var enemies = [];
+
+        function makeEnemy() {
+            const ENEMY_SIZE = 30;
+            var enemyXpos = math.floor(Math.random() * (canvas.width - ENEMY_SIZE));
+
+        }
+    </script>
+</body>

@@ -1,0 +1,53 @@
+<!doctype html>
+
+<body>
+    <canvas id="gameCanvas" width="600" height="600"></canvas>
+    <script>
+        window.onload = function () {
+            canvas = document.getElementById('gameCanvas');
+            canvasContext = canvas.getContext('2d');
+            document.addEventListener('keydown', keyPressed);
+            document.addEventListener('keyup', keyReleased);
+
+            setInterval(mainloop, 1000 / 60);
+        }
+        var playerYpos = 300;
+        var playerXpos = 100;
+        var playerSize = 30;
+
+        var spaceKeyPress = false;
+
+        const SPACE_BAR = 32;
+
+        function mainloop() {
+            colorRect(0, 0, canvas.width, canvas.height, 'black'); // bg
+            colorRect(300, 0, 30, 120, 'green'); //pole
+            colorRect(playerXpos, playerYpos, playerSize, playerSize, 'yellow'); //player
+            playerMove()
+
+        }
+
+        function keyPressed(evt) {
+            if (evt.keycode == SPACE_BAR) {
+                SPACE_BAR = true;
+            }
+        }
+
+        function keyReleased(evt) {
+            if (evt.keycode == SPACE_BAR) {
+                SPACE_BAR = false;
+            }
+
+
+            function colorRect(x, y, w, h, c) {
+                canvasContext.fillStyle = c;
+                canvasContext.fillRect(x, y, w, h);
+            }
+
+            function playerMove() {
+                if (spaceKeyPress) {
+                    playerYpos -= 5;
+                }
+            }
+    </script>
+</body>

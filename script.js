@@ -1,4 +1,4 @@
-let move_speed = 3, grativy = 0.5;
+let move_speed = 3, gravity = 0.5;
 let bird = document.querySelector('.bird');
 let img = document.getElementById('bird-1');
 let sound_point = new Audio('sounds effect/point.mp3');
@@ -70,18 +70,48 @@ function play(){
     let bird_dy = 0;
     function apply_gravity(){
         if(game_state != 'Play') return;
-        bird_dy = bird_dy + grativy;
+        bird_dy = bird_dy + gravity;
         document.addEventListener('keydown', (e) => {
             if(e.key == 'ArrowUp' || e.key == ' '){
                 img.src = 'images/Bird-2.png';
-                bird_dy = -7.6;
             }
         });
 
         document.addEventListener('keyup', (e) => {
-            if(e.key == 'ArrowUp' || e.key == ' '){
+            if(e.key == 'ArrowUp' || e.key == ' ', difficulty =='easy'){
                 img.src = 'images/Bird.png';
+                bird_dy = -7.6;
             }
+        });
+        document.addEventListener('keyup', (e) => {
+            if(e.key == 'ArrowUp' || e.key == ' ', difficulty =='medium'){
+                img.src = 'images/Bird.png';
+                bird_dy = -9.6;
+            }
+        });
+        document.addEventListener('keyup', (e) => {
+            if(e.key == 'ArrowUp' || e.key == ' ', difficulty =='hard'){
+                img.src = 'images/Bird.png';
+                bird_dy = -11.6;
+            }
+        });
+            document.addEventListener('keyup', (e) => {
+                if(e.key == 'ArrowUp' || e.key == ' ', difficulty =='EASY'){
+                    img.src = 'images/Bird.png';
+                    bird_dy = -7.6;
+                }
+            });
+            document.addEventListener('keyup', (e) => {
+                if(e.key == 'ArrowUp' || e.key == ' ', difficulty =='MEDIUM'){
+                    img.src = 'images/Bird.png';
+                    bird_dy = -9.6;
+                }
+            });
+            document.addEventListener('keyup', (e) => {
+                if(e.key == 'ArrowUp' || e.key == ' ', difficulty =='HARD'){
+                    img.src = 'images/Bird.png';
+                    bird_dy = -11.6;
+                }
         });
 
         if(bird_props.top <= 0 || bird_props.bottom >= background.bottom){
@@ -126,4 +156,17 @@ function play(){
         requestAnimationFrame(create_pipe);
     }
     requestAnimationFrame(create_pipe);
+}
+var username = '';
+while (username == '' || username == null) {
+    username = prompt('whats your username?')}
+
+var difficulty = '';
+var pass = false;
+while (pass == false) { //until happy no exit loop
+    difficulty = prompt('how hard do you want the game to be?', 'easy');
+    difficulty = difficulty.toLowerCase();
+    if (difficulty == 'easy' || difficulty == 'medium' || difficulty == 'hard' || difficulty == 'EASY' || difficulty == 'MEDIUM' || difficulty == 'HARD') {
+        pass = true;
+    }
 }
